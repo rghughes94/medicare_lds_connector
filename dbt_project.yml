@@ -5,8 +5,8 @@ config-version: 2
 profile: default                   
 
 vars:
-  input_database: medicare_lds_five_percent
-  input_schema:  raw_data
+  input_database: tuva-lds
+  input_schema:  raw_files
 
   claims_enabled: true
 

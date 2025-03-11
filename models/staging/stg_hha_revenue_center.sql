@@ -1,18 +1,18 @@
 select
-      desy_sort_key
-    , claim_no
+      cast(desy_sort_key as {{ dbt.type_string() }} ) as desy_sort_key
+    , cast(claim_no as {{ dbt.type_string() }} ) as claim_no
     , clm_line_num
-    , clm_thru_dt
+    , cast(clm_thru_dt as {{ dbt.type_string() }} ) as clm_thru_dt
     , nch_clm_type_cd
-    , rev_cntr
-    , rev_cntr_dt
+    , cast(rev_cntr as {{ dbt.type_string() }} ) as rev_cntr
+    , cast(rev_cntr_dt as {{ dbt.type_string() }} ) as rev_cntr_dt
     , rev_cntr_apc_hipps_cd
     , hcpcs_cd
     , hcpcs_1st_mdfr_cd
     , hcpcs_2nd_mdfr_cd
     , hcpcs_3rd_mdfr_cd
     , rev_cntr_pmt_mthd_ind_cd
-    , rev_cntr_unit_cnt
+    , cast(rev_cntr_unit_cnt as {{ dbt.type_string() }} ) as rev_cntr_unit_cnt
     , rev_cntr_rate_amt
     , rev_cntr_pmt_amt_amt
     , rev_cntr_tot_chrg_amt
@@ -30,5 +30,5 @@ select
     , thrpy_cap_ind_cd1
     , thrpy_cap_ind_cd2
     , file_name
-    , ingest_datetime
+    , cast(ingest_datetime as {{ dbt.type_string() }} ) as ingest_datetime
 from {{ source('medicare_lds','hha_revenue_center') }}

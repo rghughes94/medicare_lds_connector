@@ -1,8 +1,8 @@
 select
-      desy_sort_key
-    , claim_no
+      cast(desy_sort_key as {{ dbt.type_string() }} ) as desy_sort_key
+    , cast(claim_no as {{ dbt.type_string() }} ) as claim_no
     , line_num
-    , clm_thru_dt
+    , cast(clm_thru_dt as {{ dbt.type_string() }} ) as clm_thru_dt
     , nch_clm_type_cd
     , carr_prfrng_pin_num
     , prf_physn_upin
@@ -13,11 +13,11 @@ select
     , prvdr_spclty
     , prtcptng_ind_cd
     , carr_line_rdcd_pmt_phys_astn_c
-    , line_srvc_cnt
+    , cast(line_srvc_cnt as {{ dbt.type_string() }} ) as line_srvc_cnt
     , line_cms_type_srvc_cd
     , line_place_of_srvc_cd
     , carr_line_prcng_lclty_cd
-    , line_last_expns_dt
+    , cast(line_last_expns_dt as {{ dbt.type_string() }} ) as line_last_expns_dt
     , hcpcs_cd
     , hcpcs_1st_mdfr_cd
     , hcpcs_2nd_mdfr_cd
@@ -69,5 +69,5 @@ select
     , clm_next_gnrtn_aco_ind_cd4
     , clm_next_gnrtn_aco_ind_cd5
     , file_name
-    , ingest_datetime
+    , cast(ingest_datetime as {{ dbt.type_string() }} ) as ingest_datetime
 from {{ source('medicare_lds','carrier_claim_line') }}

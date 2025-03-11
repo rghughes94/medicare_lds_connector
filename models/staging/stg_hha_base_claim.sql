@@ -1,8 +1,8 @@
 select
-      desy_sort_key
-    , claim_no
+      cast(desy_sort_key as {{ dbt.type_string() }} ) as desy_sort_key
+    , cast(claim_no as {{ dbt.type_string() }} ) as claim_no
     , prvdr_num
-    , clm_thru_dt
+    , cast(clm_thru_dt as {{ dbt.type_string() }} ) as clm_thru_dt
     , nch_near_line_rec_ident_cd
     , nch_clm_type_cd
     , clm_fac_type_cd
@@ -14,8 +14,8 @@ select
     , nch_prmry_pyr_clm_pd_amt
     , nch_prmry_pyr_cd
     , prvdr_state_cd
-    , org_npi_num
-    , srvc_loc_npi_num
+    , cast(org_npi_num as {{ dbt.type_string() }} ) as org_npi_num
+    , cast(srvc_loc_npi_num as {{ dbt.type_string() }} ) as srvc_loc_npi_num
     , at_physn_upin
     , at_physn_npi
     , at_physn_spclty_cd
@@ -72,8 +72,8 @@ select
     , clm_hha_lupa_ind_cd
     , clm_hha_rfrl_cd
     , clm_hha_tot_visit_cnt
-    , clm_admsn_dt
-    , dob_dt
+    , cast(clm_admsn_dt as {{ dbt.type_string() }} ) as clm_admsn_dt
+    , cast(dob_dt as {{ dbt.type_string() }} ) as dob_dt
     , gndr_cd
     , bene_race_cd
     , bene_cnty_cd
@@ -82,7 +82,7 @@ select
     , clm_query_cd
     , fi_clm_actn_cd
     , clm_mco_pd_sw
-    , nch_bene_dschrg_dt
+    , cast(nch_bene_dschrg_dt as {{ dbt.type_string() }} ) as nch_bene_dschrg_dt
     , clm_trtmt_authrztn_num
     , clm_prcr_rtrn_cd
     , clm_next_gnrtn_aco_ind_cd1
@@ -92,5 +92,5 @@ select
     , clm_next_gnrtn_aco_ind_cd5
     , aco_id_num
     , file_name
-    , ingest_datetime
+    , cast(ingest_datetime as {{ dbt.type_string() }} ) as ingest_datetime
 from {{ source('medicare_lds','hha_base_claim') }}

@@ -1,12 +1,12 @@
 select
       desy_sort_key
-    , claim_no
-    , clm_thru_dt
+    , cast(claim_no  as {{ dbt.type_string() }} ) as claim_no
+    , cast(clm_thru_dt as {{ dbt.type_string() }} ) as clm_thru_dt
     , nch_near_line_rec_ident_cd
     , nch_clm_type_cd
     , clm_disp_cd
     , carr_num
-    , carr_clm_pmt_dnl_cd
+    , cast(carr_clm_pmt_dnl_cd as {{ dbt.type_string() }} ) as carr_clm_pmt_dnl_cd
     , clm_pmt_amt
     , carr_clm_prmry_pyr_pd_amt
     , rfr_physn_upin
@@ -20,7 +20,7 @@ select
     , carr_clm_hcpcs_yr_cd
     , carr_clm_rfrng_pin_num
     , prncpal_dgns_cd
-    , prncpal_dgns_vrsn_cd
+    , cast(prncpal_dgns_vrsn_cd as {{ dbt.type_string() }} ) as prncpal_dgns_vrsn_cd
     , icd_dgns_cd1
     , icd_dgns_vrsn_cd1
     , icd_dgns_cd2
@@ -45,7 +45,7 @@ select
     , icd_dgns_vrsn_cd11
     , icd_dgns_cd12
     , icd_dgns_vrsn_cd12
-    , dob_dt
+    , cast(dob_dt as {{ dbt.type_string() }} ) as dob_dt
     , gndr_cd
     , bene_race_cd
     , bene_cnty_cd
@@ -57,5 +57,5 @@ select
     , carr_clm_blg_npi_num
     , aco_id_num
     , file_name
-    , ingest_datetime
+    , cast( ingest_datetime as {{ dbt.type_string() }} ) as ingest_datetime
 from {{ source('medicare_lds','carrier_base_claim') }}
