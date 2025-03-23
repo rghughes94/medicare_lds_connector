@@ -1,5 +1,5 @@
 select
-            cast(desy_sort_key as {{ dbt.type_string() }} ) as desy_sort_key
+      cast(desy_sort_key as {{ dbt.type_string() }} ) as desy_sort_key
     , cast(claim_no as {{ dbt.type_string() }} ) as claim_no
     , cast(clm_line_num as {{ dbt.type_string() }} ) as clm_line_num
     , {{ try_to_cast_date('clm_thru_dt', 'YYYYMMDD') }} as clm_thru_dt
