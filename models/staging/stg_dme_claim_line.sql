@@ -6,7 +6,7 @@ select
     , cast(nch_clm_type_cd as {{ dbt.type_string() }} ) as nch_clm_type_cd
     , cast(prvdr_spclty as {{ dbt.type_string() }} ) as prvdr_spclty
     , cast(prtcptng_ind_cd as {{ dbt.type_string() }} ) as prtcptng_ind_cd
-    , cast(line_srvc_cnt as {{ dbt.type_numeric() }} ) as line_srvc_cnt
+    , cast(regexp_substr(line_srvc_cnt,'.') as integer) as line_srvc_cnt
     , cast(line_cms_type_srvc_cd as {{ dbt.type_string() }} ) as line_cms_type_srvc_cd
     , cast(line_place_of_srvc_cd as {{ dbt.type_string() }} ) as line_place_of_srvc_cd
     , {{ try_to_cast_date('line_last_expns_dt', 'YYYYMMDD') }} as line_last_expns_dt
