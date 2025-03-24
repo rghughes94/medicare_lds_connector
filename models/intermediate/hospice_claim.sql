@@ -45,12 +45,12 @@ select
     , b.desy_sort_key as member_id
     , cast('medicare' as {{ dbt.type_string() }} ) as payer
     , cast('medicare' as {{ dbt.type_string() }} ) as plan
-    , {{ try_to_cast_date('coalesce(c.claim_start_date,b.clm_hospc_start_dt_id,b.clm_thru_dt)', 'YYYYMMDD') }} as claim_start_date
-    , {{ try_to_cast_date('b.clm_thru_dt', 'YYYYMMDD') }} as claim_end_date
-    , {{ try_to_cast_date('l.rev_cntr_dt', 'YYYYMMDD') }} as claim_line_start_date
-    , {{ try_to_cast_date('l.rev_cntr_dt', 'YYYYMMDD') }} as claim_line_end_date
-    , {{ try_to_cast_date('b.clm_hospc_start_dt_id', 'YYYYMMDD') }} as admission_date
-    , {{ try_to_cast_date('b.nch_bene_dschrg_dt', 'YYYYMMDD') }} as discharge_date
+    , coalesce(c.claim_start_date,b.clm_hospc_start_dt_id,b.clm_thru_dt) as claim_start_date
+    , b.clm_thru_dt as claim_end_date
+    , l.rev_cntr_dt as claim_line_start_date
+    , l.rev_cntr_dt as claim_line_end_date
+    , b.clm_hospc_start_dt_id as admission_date
+    , b.nch_bene_dschrg_dt as discharge_date
     , cast(NULL as {{ dbt.type_string() }} ) as admit_source_code
     , cast(NULL as {{ dbt.type_string() }} ) as admit_type_code
     , cast(NULL as {{ dbt.type_string() }} ) as discharge_disposition_code

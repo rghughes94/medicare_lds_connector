@@ -54,19 +54,19 @@ select
       as bill_type_code
     , b.clm_drg_cd as ms_drg_code
     , cast(NULL as {{ dbt.type_string() }} ) as apr_drg_code
-    , l.rev_cntr as {{ dbt.type_string() }} ) as revenue_center_code
+    , l.rev_cntr as revenue_center_code
     , l.rev_cntr_unit_cnt as service_unit_quantity
-    , l.hcpcs_cd as {{ dbt.type_string() }} ) as hcpcs_code
-    , l.hcpcs_1st_mdfr_cd as {{ dbt.type_string() }} ) as hcpcs_modifier_1
-    , l.hcpcs_2nd_mdfr_cd as {{ dbt.type_string() }} ) as hcpcs_modifier_2
-    , l.hcpcs_3rd_mdfr_cd as {{ dbt.type_string() }} ) as hcpcs_modifier_3
+    , l.hcpcs_cd
+    , l.hcpcs_1st_mdfr_cd as hcpcs_modifier_1
+    , l.hcpcs_2nd_mdfr_cd as hcpcs_modifier_2
+    , l.hcpcs_3rd_mdfr_cd as hcpcs_modifier_3
     , cast(NULL as {{ dbt.type_string() }} ) as hcpcs_modifier_4
     , cast(NULL as {{ dbt.type_string() }} ) as hcpcs_modifier_5
-    , b.rndrng_physn_npi as {{ dbt.type_string() }} ) as rendering_npi
+    , b.rndrng_physn_npi as rendering_npi
     , cast(NULL as {{ dbt.type_string() }} ) as rendering_tin
-    , b.org_npi_num as {{ dbt.type_string() }} ) as billing_npi
+    , b.org_npi_num as billing_npi
     , cast(NULL as {{ dbt.type_string() }} ) as billing_tin
-    , b.org_npi_num as {{ dbt.type_string() }} ) as facility_npi
+    , b.org_npi_num as facility_npi
     , date(NULL) as paid_date
     , coalesce(p.paid_amount,cast(0 as {{ dbt.type_numeric() }})) as paid_amount
     , cast(NULL as {{ dbt.type_numeric() }}) as allowed_amount
@@ -110,22 +110,22 @@ select
     , b.clm_poa_ind_sw7 as diagnosis_poa_7
     , b.clm_poa_ind_sw8 as diagnosis_poa_8
     , b.clm_poa_ind_sw9 as diagnosis_poa_9
-    , b.clm_poa_ind_sw10  as diagnosis_poa_10
-    , b.clm_poa_ind_sw11  as diagnosis_poa_11
-    , b.clm_poa_ind_sw12  as diagnosis_poa_12
-    , b.clm_poa_ind_sw13  as diagnosis_poa_13
-    , b.clm_poa_ind_sw14  as diagnosis_poa_14
-    , b.clm_poa_ind_sw15  as diagnosis_poa_15
-    , b.clm_poa_ind_sw16  as diagnosis_poa_16
-    , b.clm_poa_ind_sw17  as diagnosis_poa_17
-    , b.clm_poa_ind_sw18  as diagnosis_poa_18
-    , b.clm_poa_ind_sw19  as diagnosis_poa_19
-    , b.clm_poa_ind_sw20  as diagnosis_poa_20
-    , b.clm_poa_ind_sw21  as diagnosis_poa_21
-    , b.clm_poa_ind_sw22  as diagnosis_poa_22
-    , b.clm_poa_ind_sw23  as diagnosis_poa_23
-    , b.clm_poa_ind_sw24  as diagnosis_poa_24
-    , b.clm_poa_ind_sw25  as diagnosis_poa_25
+    , b.clm_poa_ind_sw10 as diagnosis_poa_10
+    , b.clm_poa_ind_sw11 as diagnosis_poa_11
+    , b.clm_poa_ind_sw12 as diagnosis_poa_12
+    , b.clm_poa_ind_sw13 as diagnosis_poa_13
+    , b.clm_poa_ind_sw14 as diagnosis_poa_14
+    , b.clm_poa_ind_sw15 as diagnosis_poa_15
+    , b.clm_poa_ind_sw16 as diagnosis_poa_16
+    , b.clm_poa_ind_sw17 as diagnosis_poa_17
+    , b.clm_poa_ind_sw18 as diagnosis_poa_18
+    , b.clm_poa_ind_sw19 as diagnosis_poa_19
+    , b.clm_poa_ind_sw20 as diagnosis_poa_20
+    , b.clm_poa_ind_sw21 as diagnosis_poa_21
+    , b.clm_poa_ind_sw22 as diagnosis_poa_22
+    , b.clm_poa_ind_sw23 as diagnosis_poa_23
+    , b.clm_poa_ind_sw24 as diagnosis_poa_24
+    , b.clm_poa_ind_sw25 as diagnosis_poa_25
     , cast('icd-10-pcs' as {{ dbt.type_string() }} ) as procedure_code_type
     , b.icd_prcdr_cd1 as procedure_code_1
     , b.icd_prcdr_cd2 as procedure_code_2
@@ -180,7 +180,7 @@ select
     , cast(1 as int) as in_network_flag
     , cast('medicare_lds' as {{ dbt.type_string() }} ) as data_source
     , file_name
-    , b.ingest_datetime as ingest_datetime
+    , b.ingest_datetime
 from add_claim_id as b
     inner join {{ ref('stg_inpatient_revenue_center') }} as l
         on b.claim_no = l.claim_no

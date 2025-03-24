@@ -176,7 +176,7 @@ select
     , date(NULL) as procedure_date_24
     , date(NULL) as procedure_date_25
     , cast(1 as int) as in_network_flag
-    , cast('medicare_lds' as {{ dbt.type_string() }} )  as data_source
+    , cast('medicare_lds' as {{ dbt.type_string() }} ) as data_source
     , b.file_name
     , b.ingest_datetime
 from carrier_base_claim as b
