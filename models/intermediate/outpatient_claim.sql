@@ -43,7 +43,7 @@ select
         || b.nch_clm_type_cd
       as claim_id
     , l.clm_line_num as claim_line_number
-    , 'institutional' as claim_type
+    , cast('institutional'  as {{ dbt.type_string() }} ) as claim_type
     , b.desy_sort_key as person_id
     , b.desy_sort_key as member_id
     , cast('medicare' as {{ dbt.type_string() }} ) as payer
@@ -72,11 +72,11 @@ select
     , l.hcpcs_3rd_mdfr_cd as hcpcs_modifier_3
     , l.hcpcs_4th_mdfr_cd as hcpcs_modifier_4
     , cast(NULL as {{ dbt.type_string() }} ) as hcpcs_modifier_5
-    , b.rndrng_physn_npi as {{ dbt.type_string() }} ) as rendering_npi
+    , b.rndrng_physn_npi as rendering_npi
     , cast(NULL as {{ dbt.type_string() }} ) as rendering_tin
-    , b.org_npi_num as {{ dbt.type_string() }} ) as billing_npi
+    , b.org_npi_num as billing_npi
     , cast(NULL as {{ dbt.type_string() }} ) as billing_tin
-    , coalesce(b.org_npi_num,b.srvc_loc_npi_num) as {{ dbt.type_string() }} ) as facility_npi
+    , coalesce(b.org_npi_num,b.srvc_loc_npi_num) as facility_npi
     , date(NULL) as paid_date
     , coalesce(
             p.paid_amount
@@ -88,7 +88,7 @@ select
     , cast(null as {{ dbt.type_numeric() }}) as copayment_amount
     , cast(null as {{ dbt.type_numeric() }}) as deductible_amount
     , p.total_cost_amount as total_cost_amount
-    , 'icd-10-cm' as diagnosis_code_type
+    , cast('icd-10-cm'  as {{ dbt.type_string() }} ) as diagnosis_code_type
     , b.prncpal_dgns_cd as diagnosis_code_1
     , b.icd_dgns_cd2 as diagnosis_code_2
     , b.icd_dgns_cd3 as diagnosis_code_3
@@ -139,7 +139,7 @@ select
     , cast(NULL as {{ dbt.type_string() }} ) as diagnosis_poa_23
     , cast(NULL as {{ dbt.type_string() }} ) as diagnosis_poa_24
     , cast(NULL as {{ dbt.type_string() }} ) as diagnosis_poa_25
-    , 'icd-10-pcs' as procedure_code_type
+    , cast('icd-10-pcs' as {{ dbt.type_string() }} ) as procedure_code_type
     , b.icd_prcdr_cd1 as procedure_code_1
     , b.icd_prcdr_cd2 as procedure_code_2
     , b.icd_prcdr_cd3 as procedure_code_3
@@ -191,7 +191,7 @@ select
     , b.prcdr_dt24 as procedure_date_24
     , b.prcdr_dt25 as procedure_date_25
     , cast(1 as int) as in_network_flag
-    , 'medicare_lds' as data_source
+    , cast('medicare_lds' as {{ dbt.type_string() }} ) as data_source
     , b.file_name
     , b.ingest_datetime
 from outpatient_base_claim as b

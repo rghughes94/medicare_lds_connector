@@ -12,9 +12,9 @@ with snf_base_claim as (
 , add_claim_id as (
 
     select
-          cast(claim_no as {{ dbt.type_string() }} )
-            || cast(clm_thru_dt_year as {{ dbt.type_string() }} )
-            || cast(nch_clm_type_cd as {{ dbt.type_string() }} )
+          claim_no
+            || clm_thru_dt_year
+            || nch_clm_type_cd
           as claim_id
         , *
     from snf_base_claim
@@ -43,7 +43,7 @@ with snf_base_claim as (
 select
       b.claim_id
     , l.clm_line_num as claim_line_number
-    , 'institutional' as claim_type
+    , cast('institutional' as {{ dbt.type_string() }} ) as claim_type
     , b.desy_sort_key as person_id
     , b.desy_sort_key as member_id
     , cast('medicare' as {{ dbt.type_string() }} ) as payer
@@ -84,12 +84,12 @@ select
       ) as paid_amount
     , cast(NULL as {{ dbt.type_numeric() }}) as allowed_amount
     , p.charge_amount as charge_amount
-    , cast(null as {{ dbt.type_numeric() }}) as coinsurance_amount
-    , cast(null as {{ dbt.type_numeric() }}) as copayment_amount
-    , cast(null as {{ dbt.type_numeric() }}) as deductible_amount
+    , cast(NULL as {{ dbt.type_numeric() }}) as coinsurance_amount
+    , cast(NULL as {{ dbt.type_numeric() }}) as copayment_amount
+    , cast(NULL as {{ dbt.type_numeric() }}) as deductible_amount
     , p.total_cost_amount as total_cost_amount
-    , 'icd-10-cm' as diagnosis_code_type
-    , b.prncpal_dgns_cd as {{ dbt.type_string() }}) as diagnosis_code_1
+    , cast('icd-10-cm' as {{ dbt.type_string() }} ) as diagnosis_code_type
+    , b.prncpal_dgns_cd as diagnosis_code_1
     , b.icd_dgns_cd2 as diagnosis_code_2
     , b.icd_dgns_cd3 as diagnosis_code_3
     , b.icd_dgns_cd4 as diagnosis_code_4
@@ -139,7 +139,7 @@ select
     , cast(NULL as {{ dbt.type_string() }}) as diagnosis_poa_23
     , cast(NULL as {{ dbt.type_string() }}) as diagnosis_poa_24
     , cast(NULL as {{ dbt.type_string() }}) as diagnosis_poa_25
-    , 'icd-10-pcs' as procedure_code_type
+    , cast('icd-10-pcs' as {{ dbt.type_string() }} ) as procedure_code_type
     , b.icd_prcdr_cd1 as procedure_code_1
     , b.icd_prcdr_cd2 as procedure_code_2
     , b.icd_prcdr_cd3 as procedure_code_3
@@ -191,7 +191,7 @@ select
     , b.prcdr_dt24 as procedure_date_24
     , b.prcdr_dt25 as procedure_date_25
     , cast(1 as int) as in_network_flag
-    , 'medicare_lds' as data_source
+    , cast('medicare_lds' as {{ dbt.type_string() }} ) as data_source
     , b.file_name
     , b.ingest_datetime
 from add_claim_id as b

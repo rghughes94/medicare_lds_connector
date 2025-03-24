@@ -12,11 +12,11 @@ with hha_base_claim as (
 
     select
           claim_no as claim_id
-        , cast(clm_pmt_amt as {{ dbt.type_numeric() }}) as paid_amount
+        , clm_pmt_amt as paid_amount
         , /** medicare payment **/
-          cast(clm_pmt_amt as {{ dbt.type_numeric() }}) 
+          clm_pmt_amt
               /** primary payer payment **/
-              + cast(nch_prmry_pyr_clm_pd_amt as {{ dbt.type_numeric() }})
+              + nch_prmry_pyr_clm_pd_amt
           as total_cost_amount
         , cast(clm_tot_chrg_amt as {{ dbt.type_numeric() }}) as charge_amount
     from hha_base_claim
@@ -40,7 +40,7 @@ select
         || b.nch_clm_type_cd
       as claim_id
     , l.clm_line_num as claim_line_number
-    , 'institutional' as claim_type
+    , cast('institutional' as {{ dbt.type_string() }} ) as claim_type
     , b.desy_sort_key as person_id
     , b.desy_sort_key as member_id
     , cast('medicare' as {{ dbt.type_string() }} ) as payer
@@ -78,11 +78,11 @@ select
     , p.paid_amount as paid_amount
     , cast(NULL as {{ dbt.type_numeric() }}) as allowed_amount
     , p.charge_amount as charge_amount
-    , cast(null as {{ dbt.type_numeric() }}) as coinsurance_amount
-    , cast(null as {{ dbt.type_numeric() }}) as copayment_amount
-    , cast(null as {{ dbt.type_numeric() }}) as deductible_amount
+    , cast(NULL as {{ dbt.type_numeric() }}) as coinsurance_amount
+    , cast(NULL as {{ dbt.type_numeric() }}) as copayment_amount
+    , cast(NULL as {{ dbt.type_numeric() }}) as deductible_amount
     , p.total_cost_amount as total_cost_amount
-    , 'icd-10-cm' as diagnosis_code_type
+    , cast('icd-10-cm' as {{ dbt.type_string() }} ) as diagnosis_code_type
     , b.prncpal_dgns_cd as diagnosis_code_1
     , b.icd_dgns_cd2 as diagnosis_code_2
     , b.icd_dgns_cd3 as diagnosis_code_3
@@ -185,8 +185,8 @@ select
     , date(NULL) as procedure_date_24
     , date(NULL) as procedure_date_25
     , cast(1 as int) as in_network_flag
-    , 'medicare_lds' as data_source
-    , b.file_name as file_name
+    , cast('medicare_lds' as {{ dbt.type_string() }} ) as data_source
+    , b.file_name
     , b.ingest_datetime
 from hha_base_claim as b
     inner join {{ ref('stg_hha_revenue_center') }} as l

@@ -11,9 +11,9 @@ with inpatient_base_claim as (
 , add_claim_id as (
 
     select *
-         , cast(claim_no as {{ dbt.type_string() }} )
-               || cast(clm_thru_dt_year as {{ dbt.type_string() }} )
-               || cast(nch_clm_type_cd as {{ dbt.type_string() }}
+         , claim_no
+               || clm_thru_dt_year
+               || nch_clm_type_cd
            ) as claim_id
     from inpatient_base_claim
 
@@ -23,8 +23,8 @@ with inpatient_base_claim as (
 
     select
           claim_id
-        , sum(cast(clm_pmt_amt as {{ dbt.type_numeric() }})) as paid_amount
-        , sum(cast(clm_tot_chrg_amt as {{ dbt.type_numeric() }})) as charge_amount
+        , sum(clm_pmt_amt) as paid_amount
+        , sum(clm_tot_chrg_amt) as charge_amount
     from add_claim_id
     group by claim_id
 
@@ -33,7 +33,7 @@ with inpatient_base_claim as (
 select
       b.claim_id
     , l.clm_line_num as claim_line_number
-    , 'institutional' as claim_type
+    , cast('institutional' as {{ dbt.type_string() }} ) as claim_type
     , b.desy_sort_key as person_id
     , b.desy_sort_key as member_id
     , cast('medicare' as {{ dbt.type_string() }} ) as payer
@@ -55,7 +55,7 @@ select
     , b.clm_drg_cd as ms_drg_code
     , cast(NULL as {{ dbt.type_string() }} ) as apr_drg_code
     , l.rev_cntr as {{ dbt.type_string() }} ) as revenue_center_code
-    , regexp_substr(l.rev_cntr_unit_cnt, '.') as integer) as service_unit_quantity
+    , l.rev_cntr_unit_cnt as service_unit_quantity
     , l.hcpcs_cd as {{ dbt.type_string() }} ) as hcpcs_code
     , l.hcpcs_1st_mdfr_cd as {{ dbt.type_string() }} ) as hcpcs_modifier_1
     , l.hcpcs_2nd_mdfr_cd as {{ dbt.type_string() }} ) as hcpcs_modifier_2
@@ -71,11 +71,11 @@ select
     , coalesce(p.paid_amount,cast(0 as {{ dbt.type_numeric() }})) as paid_amount
     , cast(NULL as {{ dbt.type_numeric() }}) as allowed_amount
     , p.charge_amount as charge_amount
-    , cast(null as {{ dbt.type_numeric() }}) as coinsurance_amount
-    , cast(null as {{ dbt.type_numeric() }}) as copayment_amount
-    , cast(null as {{ dbt.type_numeric() }}) as deductible_amount
+    , cast(NULL as {{ dbt.type_numeric() }}) as coinsurance_amount
+    , cast(NULL as {{ dbt.type_numeric() }}) as copayment_amount
+    , cast(NULL as {{ dbt.type_numeric() }}) as deductible_amount
     , cast(NULL as {{ dbt.type_numeric() }}) as total_cost_amount
-    , 'icd-10-cm' as diagnosis_code_type
+    , cast('icd-10-cm' as {{ dbt.type_string() }} ) as diagnosis_code_type
     , b.prncpal_dgns_cd as diagnosis_code_1
     , b.icd_dgns_cd2 as diagnosis_code_2
     , b.icd_dgns_cd3 as diagnosis_code_3
@@ -126,7 +126,7 @@ select
     , b.clm_poa_ind_sw23  as diagnosis_poa_23
     , b.clm_poa_ind_sw24  as diagnosis_poa_24
     , b.clm_poa_ind_sw25  as diagnosis_poa_25
-    , 'icd-10-pcs' as procedure_code_type
+    , cast('icd-10-pcs' as {{ dbt.type_string() }} ) as procedure_code_type
     , b.icd_prcdr_cd1 as procedure_code_1
     , b.icd_prcdr_cd2 as procedure_code_2
     , b.icd_prcdr_cd3 as procedure_code_3
@@ -178,7 +178,7 @@ select
     , b.prcdr_dt24 as procedure_date_24
     , b.prcdr_dt25 as procedure_date_25
     , cast(1 as int) as in_network_flag
-    , 'medicare_lds' as data_source
+    , cast('medicare_lds' as {{ dbt.type_string() }} ) as data_source
     , file_name
     , b.ingest_datetime as ingest_datetime
 from add_claim_id as b
