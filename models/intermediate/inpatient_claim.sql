@@ -1,7 +1,7 @@
 with inpatient_base_claim as (
 
     select *
-         , left(clm_thru_dt,4) as clm_thru_dt_year
+         , left(cast(clm_thru_dt as {{ dbt.type_string() }} ) ,4) as clm_thru_dt_year
     from {{ ref('stg_inpatient_base_claim') }}
     where clm_mdcr_non_pmt_rsn_cd is null  /** filter out denied claims **/
 
@@ -14,7 +14,7 @@ with inpatient_base_claim as (
          , claim_no
                || clm_thru_dt_year
                || nch_clm_type_cd
-           ) as claim_id
+            as claim_id
     from inpatient_base_claim
 
 )
@@ -179,7 +179,7 @@ select
     , b.prcdr_dt25 as procedure_date_25
     , cast(1 as int) as in_network_flag
     , cast('medicare_lds' as {{ dbt.type_string() }} ) as data_source
-    , file_name
+    , b.file_name
     , b.ingest_datetime
 from add_claim_id as b
     inner join {{ ref('stg_inpatient_revenue_center') }} as l

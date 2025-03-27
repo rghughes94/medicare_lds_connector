@@ -1,7 +1,7 @@
 with carrier_base_claim as (
 
     select *
-         , left(clm_thru_dt,4) as clm_thru_dt_year
+         , left(cast(clm_thru_dt as {{ dbt.type_string() }} ) ,4) as clm_thru_dt_year
     from {{ ref('stg_carrier_base_claim') }}
     where carr_clm_pmt_dnl_cd <> '0'
     /** filter out denied claims **/
@@ -31,7 +31,7 @@ select
     , cast('medicare' as {{ dbt.type_string() }} ) as payer
     , cast('medicare' as {{ dbt.type_string() }} ) as plan
     , claim_start_date
-    , clm_thru_dt as claim_end_date
+    , b.clm_thru_dt as claim_end_date
     , line_last_expns_dt as claim_line_start_date
     , line_last_expns_dt as claim_line_end_date
     , date(NULL) as admission_date

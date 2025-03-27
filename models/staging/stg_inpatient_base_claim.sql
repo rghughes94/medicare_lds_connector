@@ -38,8 +38,8 @@ select
     , cast(nch_ptnt_status_ind_cd as {{ dbt.type_string() }} ) as nch_ptnt_status_ind_cd
     , cast(clm_pass_thru_per_diem_amt as {{ dbt.type_numeric() }} ) as clm_pass_thru_per_diem_amt
     , cast(nch_bene_ip_ddctbl_amt as {{ dbt.type_numeric() }} ) as nch_bene_ip_ddctbl_amt
-    , cast(nch_bene_pta_coinsrnc_lblty_am as {{ dbt.type_string() }} ) as nch_bene_pta_coinsrnc_lblty_am
-    , cast(nch_bene_blood_ddctbl_lblty_am as {{ dbt.type_string() }} ) as nch_bene_blood_ddctbl_lblty_am
+    , cast(nch_bene_pta_coinsrnc_lblty_am as {{ dbt.type_numeric() }} ) as nch_bene_pta_coinsrnc_lblty_am
+    , cast(nch_bene_blood_ddctbl_lblty_am as {{ dbt.type_numeric() }} ) as nch_bene_blood_ddctbl_lblty_am
     , cast(nch_profnl_cmpnt_chrg_amt as {{ dbt.type_numeric() }} ) as nch_profnl_cmpnt_chrg_amt
     , cast(nch_ip_ncvrd_chrg_amt as {{ dbt.type_numeric() }} ) as nch_ip_ncvrd_chrg_amt
     , cast(clm_tot_pps_cptl_amt as {{ dbt.type_numeric() }} ) as clm_tot_pps_cptl_amt

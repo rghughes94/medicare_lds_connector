@@ -17,7 +17,7 @@ select
     , cast(rev_cntr_packg_ind_cd as {{ dbt.type_string() }} ) as rev_cntr_packg_ind_cd
     , cast(rev_cntr_otaf_pmt_cd as {{ dbt.type_string() }} ) as rev_cntr_otaf_pmt_cd
     , cast(rev_cntr_ide_ndc_upc_num as {{ dbt.type_string() }} ) as rev_cntr_ide_ndc_upc_num
-    , cast(regexp_substr(l.rev_cntr_unit_cnt, '.') as integer) as rev_cntr_unit_cnt
+    , cast(regexp_substr(rev_cntr_unit_cnt, '.') as integer) as rev_cntr_unit_cnt
     , cast(rev_cntr_rate_amt as {{ dbt.type_numeric() }} ) as rev_cntr_rate_amt
     , cast(rev_cntr_blood_ddctbl_amt as {{ dbt.type_numeric() }} ) as rev_cntr_blood_ddctbl_amt
     , cast(rev_cntr_cash_ddctbl_amt as {{ dbt.type_numeric() }} ) as rev_cntr_cash_ddctbl_amt

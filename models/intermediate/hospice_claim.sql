@@ -1,7 +1,7 @@
 with hospice_base_claim as (
 
     select *
-         , left(clm_thru_dt,4) as clm_thru_dt_year
+         , left(cast(clm_thru_dt as {{ dbt.type_string() }} ) ,4) as clm_thru_dt_year
     from {{ ref('stg_hospice_base_claim') }}
     where clm_mdcr_non_pmt_rsn_cd is null
     /** filter out denied claims **/
@@ -83,7 +83,7 @@ select
     , cast(null as {{ dbt.type_numeric() }}) as deductible_amount
     , p.total_cost_amount as total_cost_amount
     , cast('icd-10-cm' as {{ dbt.type_string() }} ) as diagnosis_code_type
-    , b.prncpal_dgns_cd as {{ dbt.type_string() }} ) as diagnosis_code_1
+    , b.prncpal_dgns_cd as diagnosis_code_1
     , b.icd_dgns_cd2 as diagnosis_code_2
     , b.icd_dgns_cd3 as diagnosis_code_3
     , b.icd_dgns_cd4 as diagnosis_code_4

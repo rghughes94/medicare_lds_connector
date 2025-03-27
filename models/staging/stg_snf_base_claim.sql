@@ -2,7 +2,7 @@ select
       cast(desy_sort_key as {{ dbt.type_string() }} ) as desy_sort_key
     , cast(claim_no as {{ dbt.type_string() }} ) as claim_no
     , cast(prvdr_num as {{ dbt.type_string() }} ) as prvdr_num
-    , {{ try_to_cast_date('prcdr_dt1', 'YYYYMMDD') }} as prcdr_dt1
+    , {{ try_to_cast_date('clm_thru_dt', 'YYYYMMDD') }} as clm_thru_dt
     , cast(nch_near_line_rec_ident_cd as {{ dbt.type_string() }} ) as nch_near_line_rec_ident_cd
     , cast(nch_clm_type_cd as {{ dbt.type_string() }} ) as nch_clm_type_cd
     , cast(claim_query_code as {{ dbt.type_string() }} ) as claim_query_code
@@ -37,8 +37,8 @@ select
     , cast(clm_src_ip_admsn_cd as {{ dbt.type_string() }} ) as clm_src_ip_admsn_cd
     , cast(nch_ptnt_status_ind_cd as {{ dbt.type_string() }} ) as nch_ptnt_status_ind_cd
     , cast(nch_bene_ip_ddctbl_amt as {{ dbt.type_numeric() }} ) as nch_bene_ip_ddctbl_amt
-    , cast(nch_bene_pta_coinsrnc_lblty_am as {{ dbt.type_string() }} ) as nch_bene_pta_coinsrnc_lblty_am
-    , cast(nch_bene_blood_ddctbl_lblty_am as {{ dbt.type_string() }} ) as nch_bene_blood_ddctbl_lblty_am
+    , cast(nch_bene_pta_coinsrnc_lblty_am as {{ dbt.type_numeric() }} ) as nch_bene_pta_coinsrnc_lblty_am
+    , cast(nch_bene_blood_ddctbl_lblty_am as {{ dbt.type_numeric() }} ) as nch_bene_blood_ddctbl_lblty_am
     , cast(nch_ip_ncvrd_chrg_amt as {{ dbt.type_numeric() }} ) as nch_ip_ncvrd_chrg_amt
     , cast(clm_pps_cptl_fsp_amt as {{ dbt.type_numeric() }} ) as clm_pps_cptl_fsp_amt
     , cast(clm_pps_cptl_outlier_amt as {{ dbt.type_numeric() }} ) as clm_pps_cptl_outlier_amt

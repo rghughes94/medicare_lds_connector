@@ -11,7 +11,7 @@ select
     , cast(fi_num as {{ dbt.type_string() }} ) as fi_num
     , cast(clm_mdcr_non_pmt_rsn_cd as {{ dbt.type_string() }} ) as clm_mdcr_non_pmt_rsn_cd
     , cast(clm_pmt_amt as {{ dbt.type_numeric() }} ) as clm_pmt_amt
-    , cast(nch_prmry_pyr_clm_pd_amt as {{ dbt.type_string() }} ) as nch_prmry_pyr_clm_pd_amt
+    , cast(nch_prmry_pyr_clm_pd_amt as {{ dbt.type_numeric() }} ) as nch_prmry_pyr_clm_pd_amt
     , cast(nch_prmry_pyr_cd as {{ dbt.type_string() }} ) as nch_prmry_pyr_cd
     , cast(prvdr_state_cd as {{ dbt.type_string() }} ) as prvdr_state_cd
     , cast(org_npi_num as {{ dbt.type_string() }} ) as org_npi_num

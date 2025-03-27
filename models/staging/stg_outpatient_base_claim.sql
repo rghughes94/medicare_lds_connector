@@ -33,7 +33,7 @@ select
     , cast(clm_mco_pd_sw as {{ dbt.type_string() }} ) as clm_mco_pd_sw
     , cast(ptnt_dschrg_stus_cd as {{ dbt.type_string() }} ) as ptnt_dschrg_stus_cd
     , cast(clm_tot_chrg_amt as {{ dbt.type_numeric() }} ) as clm_tot_chrg_amt
-    , cast(nch_bene_blood_ddctbl_lblty_am as {{ dbt.type_string() }} ) as nch_bene_blood_ddctbl_lblty_am
+    , cast(nch_bene_blood_ddctbl_lblty_am as {{ dbt.type_numeric() }} ) as nch_bene_blood_ddctbl_lblty_am
     , cast(nch_profnl_cmpnt_chrg_amt as {{ dbt.type_numeric() }} ) as nch_profnl_cmpnt_chrg_amt
     , cast(prncpal_dgns_cd as {{ dbt.type_string() }} ) as prncpal_dgns_cd
     , cast(icd_dgns_cd1 as {{ dbt.type_string() }} ) as icd_dgns_cd1
