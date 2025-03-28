@@ -71,7 +71,7 @@ select
     , cast(icd_dgns_e_cd10 as {{ dbt.type_string() }} ) as icd_dgns_e_cd10
     , cast(icd_dgns_e_cd11 as {{ dbt.type_string() }} ) as icd_dgns_e_cd11
     , cast(icd_dgns_e_cd12 as {{ dbt.type_string() }} ) as icd_dgns_e_cd12
-    , cast(clm_hospc_start_dt_id as {{ dbt.type_string() }} ) as clm_hospc_start_dt_id
+    {{ try_to_cast_date('clm_hospc_start_dt_id', 'YYYYMMDD') }} as clm_hospc_start_dt_id
     , cast(bene_hospc_prd_cnt as {{ dbt.type_string() }} ) as bene_hospc_prd_cnt
     , {{ try_to_cast_date('dob_dt', 'YYYYMMDD') }} as dob_dt
     , cast(gndr_cd as {{ dbt.type_string() }} ) as gndr_cd
