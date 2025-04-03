@@ -57,5 +57,5 @@ select
     , cast(line_othr_apld_amt6 as {{ dbt.type_numeric() }} ) as line_othr_apld_amt6
     , cast(line_othr_apld_amt7 as {{ dbt.type_numeric() }} ) as line_othr_apld_amt7
     , cast(file_name as {{ dbt.type_string() }} ) as file_name
-    , cast(ingest_datetime as {{ dbt.type_timestamp() }} ) as ingest_datetime 
+    , cast(null as {{ dbt.type_timestamp() }} ) as ingest_datetime 
 from {{ source('medicare_lds','dme_claim_line') }}

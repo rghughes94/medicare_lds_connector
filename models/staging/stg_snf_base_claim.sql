@@ -162,5 +162,5 @@ select
     , cast(clm_next_gnrtn_aco_ind_cd5 as {{ dbt.type_string() }} ) as clm_next_gnrtn_aco_ind_cd5
     , cast(aco_id_num as {{ dbt.type_string() }} ) as aco_id_num
     , cast(file_name as {{ dbt.type_string() }} ) as file_name
-    , cast(ingest_datetime as {{ dbt.type_timestamp() }} ) as ingest_datetime 
+    , cast(null as {{ dbt.type_timestamp() }} ) as ingest_datetime 
 from {{ source('medicare_lds','snf_base_claim') }}

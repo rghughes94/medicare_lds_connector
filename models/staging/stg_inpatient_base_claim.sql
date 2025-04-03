@@ -57,7 +57,7 @@ select
     , cast(nch_blood_pnts_frnshd_qty as {{ dbt.type_string() }} ) as nch_blood_pnts_frnshd_qty
     , {{ try_to_cast_date('nch_vrfd_ncvrd_stay_from_dt', 'YYYYMMDD') }} as nch_vrfd_ncvrd_stay_from_dt
     , {{ try_to_cast_date('nch_vrfd_ncvrd_stay_thru_dt', 'YYYYMMDD') }} as nch_vrfd_ncvrd_stay_thru_dt
-    , cast(nch_bene_mdcr_bnfts_exhtd_dt_i as {{ dbt.type_string() }} ) as nch_bene_mdcr_bnfts_exhtd_dt_i
+    , {{ try_to_cast_date('nch_bene_mdcr_bnfts_exhtd_dt_i', 'YYYYMMDD') }} as nch_bene_mdcr_bnfts_exhtd_dt_i
     , {{ try_to_cast_date('nch_bene_dschrg_dt', 'YYYYMMDD') }} as nch_bene_dschrg_dt
     , cast(clm_drg_cd as {{ dbt.type_string() }} ) as clm_drg_cd
     , cast(clm_drg_outlier_stay_cd as {{ dbt.type_string() }} ) as clm_drg_outlier_stay_cd
@@ -229,5 +229,5 @@ select
     , cast(clm_next_gnrtn_aco_ind_cd5 as {{ dbt.type_string() }} ) as clm_next_gnrtn_aco_ind_cd5
     , cast(aco_id_num as {{ dbt.type_string() }} ) as aco_id_num
     , cast(file_name as {{ dbt.type_string() }} ) as file_name
-    , cast(ingest_datetime as {{ dbt.type_timestamp() }} ) as ingest_datetime 
+    , cast(null as {{ dbt.type_timestamp() }} ) as ingest_datetime 
 from {{ source('medicare_lds','inpatient_base_claim') }}
