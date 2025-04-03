@@ -51,7 +51,7 @@ select
     , cast(bene_state_cd as {{ dbt.type_string() }} ) as bene_state_cd
     , cast(cwf_bene_mdcr_stus_cd as {{ dbt.type_string() }} ) as cwf_bene_mdcr_stus_cd
     , cast(clm_bene_pd_amt as {{ dbt.type_numeric() }} ) as clm_bene_pd_amt
-    , cast(aco_id_num as {{ dbt.type_numeric() }} ) as aco_id_num
-    , cast(file_name as {{ dbt.type_numeric() }} ) as file_name
+    , cast(aco_id_num as {{ dbt.type_string() }} ) as aco_id_num
+    , cast(file_name as {{ dbt.type_string() }} ) as file_name
     , cast(ingest_datetime as {{ dbt.type_timestamp() }} ) as ingest_datetime 
 from {{ source('medicare_lds','dme_base_claim') }}
