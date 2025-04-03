@@ -1,7 +1,7 @@
 with dme_base_claim as (
 
     select *
-         , left(clm_thru_dt,4) as clm_thru_dt_year
+         , left(cast(clm_thru_dt as {{ dbt.type_string() }} ) ,4) as clm_thru_dt_year
     from {{ ref('stg_dme_base_claim') }}
     where carr_clm_pmt_dnl_cd <> '0'
     /** filter out denied claims **/
@@ -26,10 +26,10 @@ select
       as claim_id
     , l.clm_line_num as claim_line_number
     , cast('professional'  as {{ dbt.type_string() }} ) as claim_type
-    , b.desy_sort_key as {{ dbt.type_string() }} ) as person_id
-    , b.desy_sort_key as {{ dbt.type_string() }} ) as member_id
-    , cast('medicare'  as {{ dbt.type_string() }} ) as {{ dbt.type_string() }} ) as payer
-    , cast('medicare'  as {{ dbt.type_string() }} ) as {{ dbt.type_string() }} ) as plan
+    , b.desy_sort_key as person_id
+    , b.desy_sort_key as member_id
+    , cast('medicare'  as {{ dbt.type_string() }} ) as payer
+    , cast('medicare'  as {{ dbt.type_string() }} ) as plan
     , c.claim_start_date
     , b.clm_thru_dt as claim_end_date
     , l.line_last_expns_dt as claim_line_start_date
