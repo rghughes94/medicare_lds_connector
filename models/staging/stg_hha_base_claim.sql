@@ -72,8 +72,8 @@ select
     , cast(clm_hha_lupa_ind_cd as {{ dbt.type_string() }} ) as clm_hha_lupa_ind_cd
     , cast(clm_hha_rfrl_cd as {{ dbt.type_string() }} ) as clm_hha_rfrl_cd
     , cast(clm_hha_tot_visit_cnt as integer ) as clm_hha_tot_visit_cnt
-    , cast(clm_admsn_dt as date ) as clm_admsn_dt
-    , cast(dob_dt as date ) as dob_dt
+    , {{ try_to_cast_date('clm_admsn_dt', 'YYYYMMDD') }} as clm_admsn_dt
+    , {{ try_to_cast_date('dob_dt', 'YYYYMMDD') }} as dob_dt
     , cast(gndr_cd as {{ dbt.type_string() }} ) as gndr_cd
     , cast(bene_race_cd as {{ dbt.type_string() }} ) as bene_race_cd
     , cast(bene_cnty_cd as {{ dbt.type_string() }} ) as bene_cnty_cd
@@ -82,7 +82,7 @@ select
     , cast(clm_query_cd as {{ dbt.type_string() }} ) as clm_query_cd
     , cast(fi_clm_actn_cd as {{ dbt.type_string() }} ) as fi_clm_actn_cd
     , cast(clm_mco_pd_sw as {{ dbt.type_string() }} ) as clm_mco_pd_sw
-    , cast(nch_bene_dschrg_dt as date) as nch_bene_dschrg_dt
+    , {{ try_to_cast_date('nch_bene_dschrg_dt', 'YYYYMMDD') }} as nch_bene_dschrg_dt
     , cast(clm_trtmt_authrztn_num as {{ dbt.type_string() }} ) as clm_trtmt_authrztn_num
     , cast(clm_prcr_rtrn_cd as {{ dbt.type_string() }} ) as clm_prcr_rtrn_cd
     , cast(clm_next_gnrtn_aco_ind_cd1 as {{ dbt.type_string() }} ) as clm_next_gnrtn_aco_ind_cd1
