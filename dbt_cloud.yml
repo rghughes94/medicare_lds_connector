@@ -1,0 +1,28 @@
+version: "1"
+context:
+  active-host: "cloud.getdbt.com"
+  active-project: "395957"
+projects:
+  - project-name: "Football Data"
+    project-id: "395548"
+    account-name: "RobCo"
+    account-id: "7867"
+    account-host: "cloud.getdbt.com"
+    token-name: "cloud-cli-225a"
+    token-value: "dbtu__CTd4EUikIR-vIg2L315SApH93z5dlWT8Q2zisHuEXoWC7tq70"
+  - project-name: "Tuva Project"
+    project-id: "395555"
+    account-name: "RobCo"
+    account-id: "7867"
+    account-host: "cloud.getdbt.com"
+    token-name: "cloud-cli-225a"
+    token-value: "dbtu__CTd4EUikIR-vIg2L315SApH93z5dlWT8Q2zisHuEXoWC7tq70"
+  - project-name: "Tuva Project - LDS Connector"
+    project-id: "395957"
+    account-name: "RobCo"
+    account-id: "7867"
+    account-host: "cloud.getdbt.com"
+    token-name: "cloud-cli-225a"
+    token-value: "dbtu__CTd4EUikIR-vIg2L315SApH93z5dlWT8Q2zisHuEXoWC7tq70"
+
+

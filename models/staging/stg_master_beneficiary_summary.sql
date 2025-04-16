@@ -64,8 +64,8 @@ select
     , cast(smi_coverage as {{ dbt.type_string() }} ) as smi_coverage 
     , cast(hmo_coverage as {{ dbt.type_string() }} ) as hmo_coverage 
     , cast(state_buy_in_coverage as {{ dbt.type_string() }} ) as state_buy_in_coverage 
-    , cast(valid_date_of_death_switch as {{ dbt.type_string() }} ) as valid_date_of_death_switch 
-    , cast(date_of_death as {{ dbt.type_string() }} ) as date_of_death 
+    , cast(valid_date_of_death_switch as {{ dbt.type_string() }} ) as valid_date_of_death_switch
+    , {{ try_to_cast_date('date_of_death', 'YYYYMMDD') }} as date_of_death 
     , cast(dual_stus_cd_01 as {{ dbt.type_string() }} ) as dual_stus_cd_01 
     , cast(dual_stus_cd_02 as {{ dbt.type_string() }} ) as dual_stus_cd_02 
     , cast(dual_stus_cd_03 as {{ dbt.type_string() }} ) as dual_stus_cd_03 

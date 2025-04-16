@@ -2,7 +2,10 @@ name: 'medicare_lds_connector'
 version: '0.1.1'
 config-version: 2
 
-profile: default                   
+profile: default     
+
+dbt-cloud:
+    project-id: 395957
 
 vars:
   input_database: tuva-lds
