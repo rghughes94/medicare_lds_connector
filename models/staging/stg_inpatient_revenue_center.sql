@@ -2,7 +2,7 @@ select
       cast(desy_sort_key as {{ dbt.type_string() }} ) as desy_sort_key
     , cast(claim_no as {{ dbt.type_string() }} ) as claim_no
     , cast(clm_line_num as {{ dbt.type_string() }} ) as clm_line_num
-    , cast(clm_thru_dt as {{ dbt.type_string() }} ) as clm_thru_dt
+    , {{ try_to_cast_date('clm_thru_dt', 'YYYYMMDD') }} as clm_thru_dt
     , cast(nch_clm_type_cd as {{ dbt.type_string() }} ) as nch_clm_type_cd
     , cast(rev_cntr as {{ dbt.type_string() }} ) as rev_cntr
     , cast(hcpcs_cd as {{ dbt.type_string() }} ) as hcpcs_cd

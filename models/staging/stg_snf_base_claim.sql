@@ -50,11 +50,11 @@ select
     , cast(bene_tot_coinsrnc_days_cnt as {{ dbt.type_string() }} ) as bene_tot_coinsrnc_days_cnt
     , cast(clm_non_utlztn_days_cnt as {{ dbt.type_string() }} ) as clm_non_utlztn_days_cnt
     , cast(nch_blood_pnts_frnshd_qty as {{ dbt.type_string() }} ) as nch_blood_pnts_frnshd_qty
-    , cast(nch_qlfyd_stay_thru_dt as {{ dbt.type_string() }} ) as nch_qlfyd_stay_thru_dt
-    , cast(nch_vrfd_ncvrd_stay_from_dt as {{ dbt.type_string() }} ) as nch_vrfd_ncvrd_stay_from_dt
-    , cast(nch_vrfd_ncvrd_stay_thru_dt as {{ dbt.type_string() }} ) as nch_vrfd_ncvrd_stay_thru_dt
-    , cast(nch_bene_mdcr_bnfts_exhtd_dt_i as {{ dbt.type_string() }} ) as nch_bene_mdcr_bnfts_exhtd_dt_i
-    , cast(nch_bene_dschrg_dt as {{ dbt.type_string() }} ) as nch_bene_dschrg_dt
+    , {{ try_to_cast_date('nch_qlfyd_stay_thru_dt', 'YYYYMMDD') }} as nch_qlfyd_stay_thru_dt
+    , {{ try_to_cast_date('nch_vrfd_ncvrd_stay_from_dt', 'YYYYMMDD') }} as nch_vrfd_ncvrd_stay_from_dt
+    , {{ try_to_cast_date('nch_vrfd_ncvrd_stay_thru_dt', 'YYYYMMDD') }} as nch_vrfd_ncvrd_stay_thru_dt
+    , {{ try_to_cast_date('nch_bene_mdcr_bnfts_exhtd_dt_i', 'YYYYMMDD') }} as nch_bene_mdcr_bnfts_exhtd_dt_i
+    , {{ try_to_cast_date('nch_bene_dschrg_dt', 'YYYYMMDD') }} as nch_bene_dschrg_dt
     , cast(clm_drg_cd as {{ dbt.type_string() }} ) as clm_drg_cd
     , cast(admtg_dgns_cd as {{ dbt.type_string() }} ) as admtg_dgns_cd
     , cast(prncpal_dgns_cd as {{ dbt.type_string() }} ) as prncpal_dgns_cd
