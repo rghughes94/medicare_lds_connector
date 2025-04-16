@@ -32,7 +32,7 @@ select
     , cast(ptnt_dschrg_stus_cd as {{ dbt.type_string() }} ) as ptnt_dschrg_stus_cd
     , cast(clm_pps_ind_cd as {{ dbt.type_string() }} ) as clm_pps_ind_cd
     , cast(clm_tot_chrg_amt as {{ dbt.type_numeric() }} ) as clm_tot_chrg_amt
-    , cast(clm_admsn_dt as {{ dbt.type_string() }} ) as clm_admsn_dt
+    , {{ try_to_cast_date('clm_admsn_dt', 'YYYYMMDD') }} as clm_admsn_dt
     , cast(clm_ip_admsn_type_cd as {{ dbt.type_string() }} ) as clm_ip_admsn_type_cd
     , cast(clm_src_ip_admsn_cd as {{ dbt.type_string() }} ) as clm_src_ip_admsn_cd
     , cast(nch_ptnt_status_ind_cd as {{ dbt.type_string() }} ) as nch_ptnt_status_ind_cd
