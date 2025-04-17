@@ -57,5 +57,5 @@ select
     , cast(carr_clm_blg_npi_num as {{ dbt.type_string() }} ) as carr_clm_blg_npi_num
     , cast(aco_id_num as {{ dbt.type_string() }} ) as aco_id_num
     , cast(file_name as {{ dbt.type_string() }} ) as file_name
-    , cast(null as {{ dbt.type_timestamp() }} ) as ingest_datetime
+    , cast(ingest_datetime as {{ dbt.type_timestamp() }} ) as ingest_datetime
 from {{ source('medicare_lds','carrier_base_claim') }}

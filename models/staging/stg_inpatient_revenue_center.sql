@@ -23,5 +23,5 @@ select
     , cast(thrpy_cap_ind_cd1 as {{ dbt.type_string() }} ) as thrpy_cap_ind_cd1
     , cast(thrpy_cap_ind_cd2 as {{ dbt.type_string() }} ) as thrpy_cap_ind_cd2
     , cast(file_name as {{ dbt.type_string() }} ) as file_name
-    , cast(null as {{ dbt.type_timestamp() }} ) as ingest_datetime 
+    , cast(ingest_datetime as {{ dbt.type_timestamp() }} ) as ingest_datetime 
 from {{ source('medicare_lds','inpatient_revenue_center') }}

@@ -41,5 +41,5 @@ select
     , cast(thrpy_cap_ind_cd2 as {{ dbt.type_string() }} ) as thrpy_cap_ind_cd2
     , cast(rc_ptnt_add_on_pymt_amt as {{ dbt.type_numeric() }} ) as rc_ptnt_add_on_pymt_amt
     , cast(file_name as {{ dbt.type_string() }} ) as file_name
-    , cast(null as {{ dbt.type_timestamp() }} ) as ingest_datetime
+    , cast(ingest_datetime as {{ dbt.type_timestamp() }} ) as ingest_datetime
 from {{ source('medicare_lds','outpatient_revenue_center') }}
