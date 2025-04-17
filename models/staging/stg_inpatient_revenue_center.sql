@@ -10,7 +10,7 @@ select
     , cast(hcpcs_2nd_mdfr_cd as {{ dbt.type_string() }} ) as hcpcs_2nd_mdfr_cd
     , cast(hcpcs_3rd_mdfr_cd as {{ dbt.type_string() }} ) as hcpcs_3rd_mdfr_cd
     , cast(regexp_substr(rev_cntr_unit_cnt, '.') as integer) as rev_cntr_unit_cnt
-    , cast(rev_cntr_rate_amt as {{ dbt.type_string() }} ) as rev_cntr_rate_amt
+    , cast(rev_cntr_rate_amt as {{ dbt.type_numeric() }} ) as rev_cntr_rate_amt
     , cast(rev_cntr_tot_chrg_amt as {{ dbt.type_numeric() }} ) as rev_cntr_tot_chrg_amt
     , cast(rev_cntr_ncvrd_chrg_amt as {{ dbt.type_numeric() }} ) as rev_cntr_ncvrd_chrg_amt
     , cast(rev_cntr_ddctbl_coinsrnc_cd as {{ dbt.type_string() }} ) as rev_cntr_ddctbl_coinsrnc_cd

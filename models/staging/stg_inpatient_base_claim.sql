@@ -50,11 +50,11 @@ select
     , cast(clm_pps_cptl_excptn_amt as {{ dbt.type_numeric() }} ) as clm_pps_cptl_excptn_amt
     , cast(clm_pps_old_cptl_hld_hrmls_amt as {{ dbt.type_numeric() }} ) as clm_pps_old_cptl_hld_hrmls_amt
     , cast(clm_pps_cptl_drg_wt_num as {{ dbt.type_string() }} ) as clm_pps_cptl_drg_wt_num
-    , cast(clm_utlztn_day_cnt as {{ dbt.type_string() }} ) as clm_utlztn_day_cnt
-    , cast(bene_tot_coinsrnc_days_cnt as {{ dbt.type_string() }} ) as bene_tot_coinsrnc_days_cnt
-    , cast(bene_lrd_used_cnt as {{ dbt.type_string() }} ) as bene_lrd_used_cnt
-    , cast(clm_non_utlztn_days_cnt as {{ dbt.type_string() }} ) as clm_non_utlztn_days_cnt
-    , cast(nch_blood_pnts_frnshd_qty as {{ dbt.type_string() }} ) as nch_blood_pnts_frnshd_qty
+    , cast(clm_utlztn_day_cnt as integer) as clm_utlztn_day_cnt
+    , cast(bene_tot_coinsrnc_days_cnt as integer) as bene_tot_coinsrnc_days_cnt
+    , cast(bene_lrd_used_cnt as integer) as bene_lrd_used_cnt
+    , cast(clm_non_utlztn_days_cnt as integer) as clm_non_utlztn_days_cnt
+    , cast(nch_blood_pnts_frnshd_qty as integer) as nch_blood_pnts_frnshd_qty
     , {{ try_to_cast_date('nch_vrfd_ncvrd_stay_from_dt', 'YYYYMMDD') }} as nch_vrfd_ncvrd_stay_from_dt
     , {{ try_to_cast_date('nch_vrfd_ncvrd_stay_thru_dt', 'YYYYMMDD') }} as nch_vrfd_ncvrd_stay_thru_dt
     , {{ try_to_cast_date('nch_bene_mdcr_bnfts_exhtd_dt_i', 'YYYYMMDD') }} as nch_bene_mdcr_bnfts_exhtd_dt_i

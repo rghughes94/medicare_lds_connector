@@ -138,7 +138,7 @@ select
     , cast(bene_state_cd as {{ dbt.type_string() }} ) as bene_state_cd
     , cast(cwf_bene_mdcr_stus_cd as {{ dbt.type_string() }} ) as cwf_bene_mdcr_stus_cd
     , cast(fi_clm_actn_cd as {{ dbt.type_string() }} ) as fi_clm_actn_cd
-    , cast(nch_blood_pnts_frnshd_qty as {{ dbt.type_string() }} ) as nch_blood_pnts_frnshd_qty
+    , cast(nch_blood_pnts_frnshd_qty as integer) as nch_blood_pnts_frnshd_qty
     , cast(clm_trtmt_authrztn_num as {{ dbt.type_string() }} ) as clm_trtmt_authrztn_num
     , cast(clm_prcr_rtrn_cd as {{ dbt.type_string() }} ) as clm_prcr_rtrn_cd
     , cast(clm_op_trans_type_cd as {{ dbt.type_string() }} ) as clm_op_trans_type_cd

@@ -28,9 +28,9 @@ select
     , cast(rfr_physn_npi as {{ dbt.type_string() }} ) as rfr_physn_npi
     , cast(rfr_physn_spclty_cd as {{ dbt.type_string() }} ) as rfr_physn_spclty_cd
     , cast(ptnt_dschrg_stus_cd as {{ dbt.type_string() }} ) as ptnt_dschrg_stus_cd
-    , cast(clm_tot_chrg_amt as {{ dbt.type_string() }} ) as clm_tot_chrg_amt
+    , cast(clm_tot_chrg_amt as {{ dbt.type_numeric() }} ) as clm_tot_chrg_amt
     , cast(nch_ptnt_status_ind_cd as {{ dbt.type_string() }} ) as nch_ptnt_status_ind_cd
-    , cast(clm_utlztn_day_cnt as {{ dbt.type_string() }} ) as clm_utlztn_day_cnt
+    , cast(clm_utlztn_day_cnt as integer) as clm_utlztn_day_cnt
     , {{ try_to_cast_date('nch_bene_dschrg_dt', 'YYYYMMDD') }} as nch_bene_dschrg_dt
     , cast(prncpal_dgns_cd as {{ dbt.type_string() }} ) as prncpal_dgns_cd
     , cast(icd_dgns_cd1 as {{ dbt.type_string() }} ) as icd_dgns_cd1
@@ -72,7 +72,7 @@ select
     , cast(icd_dgns_e_cd11 as {{ dbt.type_string() }} ) as icd_dgns_e_cd11
     , cast(icd_dgns_e_cd12 as {{ dbt.type_string() }} ) as icd_dgns_e_cd12
     , {{ try_to_cast_date('clm_hospc_start_dt_id', 'YYYYMMDD') }} as clm_hospc_start_dt_id
-    , cast(bene_hospc_prd_cnt as {{ dbt.type_string() }} ) as bene_hospc_prd_cnt
+    , cast(bene_hospc_prd_cnt as integer) as bene_hospc_prd_cnt
     , {{ try_to_cast_date('dob_dt', 'YYYYMMDD') }} as dob_dt
     , cast(gndr_cd as {{ dbt.type_string() }} ) as gndr_cd
     , cast(bene_race_cd as {{ dbt.type_string() }} ) as bene_race_cd
