@@ -9,3 +9,5 @@ package-lock.yml
 .venv/
 package-lock.yml
 .vscode
+dbt_cloud.yml
+dbt_project.yml
