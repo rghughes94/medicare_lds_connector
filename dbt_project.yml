@@ -4,12 +4,10 @@ config-version: 2
 
 profile: default     
 
-dbt-cloud:
-    project-id: 395957
 
 vars:
-  input_database: tuva-lds
-  input_schema:  raw_files
+  input_database: medicare_lds_five_percent
+  input_schema:  raw_data
 
   claims_enabled: true
 
