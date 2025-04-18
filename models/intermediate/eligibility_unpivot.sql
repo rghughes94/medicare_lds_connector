@@ -131,7 +131,7 @@ select
     , unpivot_hmo_status.hmo_status
     , unpivot_entitlement.entitlement
     , demographics.file_name
-    , demographics.ingest_datetime
+    , cast(demographics.ingest_datetime as timestamp) as ingest_datetime
 from demographics
      inner join unpivot_dual_status
          on demographics.desy_sort_key = unpivot_dual_status.desy_sort_key
