@@ -8,3 +8,4 @@ package-lock.yml
 .mise.toml
 .venv/
 package-lock.yml
+.vscode
